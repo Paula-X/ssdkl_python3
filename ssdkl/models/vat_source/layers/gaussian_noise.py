@@ -12,7 +12,7 @@ class GaussianNoise(Layer):
         self.rng = RandomStreams(numpy.random.randint(1234))
 
     def forward(self,x):
-        print "Layer/GaussianNoise"
+        print ("Layer/GaussianNoise")
         noise = self.rng.normal(std=self.std,size=x.shape)
         return x + noise
 
