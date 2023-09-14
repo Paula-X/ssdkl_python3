@@ -33,8 +33,7 @@ class PseudoInverseOp : public OpKernel {
 
             // Create an output tensor
             Tensor* output_tensor = NULL;
-            OP_REQUIRES_OK(context, context->allocate_output(0, input_tensor.shape(),
-                                                             &output_tensor));
+            OP_REQUIRES_OK(context, context->allocate_output(0, input_tensor.shape(), &output_tensor));
             auto output = output_tensor->template matrix<float>();
 
             Eigen::JacobiSVD<Eigen::MatrixXf> svd(matrix_input, Eigen::ComputeThinU | Eigen::ComputeThinV);
@@ -96,8 +95,7 @@ class PseudoInverseOpNoDet : public OpKernel {
 
             // Create an output tensor
             Tensor* output_tensor = NULL;
-            OP_REQUIRES_OK(context, context->allocate_output(0, input_tensor.shape(),
-                                                             &output_tensor));
+            OP_REQUIRES_OK(context, context->allocate_output(0, input_tensor.shape(), &output_tensor));
             auto output = output_tensor->template matrix<float>();
 
             Eigen::JacobiSVD<Eigen::MatrixXf> svd(matrix_input, Eigen::ComputeThinU | Eigen::ComputeThinV);

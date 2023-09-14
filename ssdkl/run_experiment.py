@@ -19,7 +19,7 @@ def main(config):
     trainer.run_trials()
     t_end = time.time()
 
-    print 'Finished in {} seconds'.format(t_end - t_start)
+    print ('Finished in {} seconds'.format(t_end - t_start))
 
 
 if __name__ == '__main__':

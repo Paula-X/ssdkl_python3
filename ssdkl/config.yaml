@@ -14,8 +14,8 @@ dataset: ['blog', 'buzz', 'ctslice', 'electric', 'elevators', 'parkinsons', 'pro
 
 # Places to find/save things
 ###################### CHANGE THIS ####################################
-data_dir: /path/to/data/
-results_dir: /path/to/output
+data_dir: /home/lunet/corx2/Downloads/ssdkl/ssdkl_uci_data
+results_dir: /home/lunet/corx2/Downloads/ssdkl/output
 #######################################################################
 
 # Training parameters

@@ -21,10 +21,10 @@ def get_normalized_vector(v):
 
 def get_perturbation(dir, epsilon,norm_constraint):
         if (norm_constraint == 'max'):
-            print 'perturb:max'
+            print ('perturb:max')
             return epsilon * T.sgn(dir)
         elif (norm_constraint == 'L2'):
-            print 'perturb:L2'
+            print ('perturb:L2')
             dir = get_normalized_vector(dir)
             dir = epsilon * dir
             return dir
@@ -37,12 +37,12 @@ def adversarial_training(x,t,forward_func,
                          lamb = numpy.asarray(1.0,theano.config.floatX),
                          norm_constraint='max',
                          forward_func_for_generating_adversarial_examples=None):
-    print "costs/adversarial_training"
-    print "### HyperParameters ###"
-    print "epsilon:", str(epsilon)
-    print "lambda:", str(lamb)
-    print "norm_constraint:", str(norm_constraint)
-    print "#######################"
+    print ("costs/adversarial_training")
+    print ("### HyperParameters ###")
+    print ("epsilon:", str(epsilon))
+    print ("lambda:", str(lamb))
+    print ("norm_constraint:", str(norm_constraint))
+    print ("#######################")
     ret = 0
     nll_cost = get_main_obj(forward_func(x),t,main_obj_type)
     ret += nll_cost

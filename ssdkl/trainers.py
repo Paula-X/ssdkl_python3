@@ -96,7 +96,7 @@ def setup(config, use_timestamp):
             config['max_iters'] = 10
             trainer_name = 'CoregTrainer'
         else:
-            print 'Model misspecified'
+            print('Model misspecified')
 
         results_dir += timestamp
         config['data_dir'] = data_dir

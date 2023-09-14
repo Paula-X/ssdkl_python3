@@ -13,7 +13,7 @@ class Dropout(Layer):
         self.rng = RandomStreams(numpy.random.randint(1234))
 
     def forward(self,x):
-        print "Layer/Dropout"
+        print ("Layer/Dropout")
         mask = T.cast( ( 1 / self.p ) * self.rng.binomial(n=1,p=self.p,size=x.shape), dtype=theano.config.floatX)
         return mask*x
 

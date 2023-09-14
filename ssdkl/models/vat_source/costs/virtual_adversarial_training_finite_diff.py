@@ -16,15 +16,15 @@ def virtual_adversarial_training_finite_diff(x,t,forward_func,
                          xi = 1e-6,
                          x_for_generating_adversarial_examples=None,
                          forward_func_for_generating_adversarial_examples=None,):
-    print "costs/virtual_adversarial_training_finite_diff"
-    print "### HyperParameters ###"
-    print "epsilon:", str(epsilon)
-    print "lambda:", str(lamb)
-    print "norm_constraint:", str(norm_constraint)
-    print "num_power_iter:", str(num_power_iter)
-    print "unchain_y:", str(unchain_y)
-    print "xi:", str(xi)
-    print "#######################"
+    print ("costs/virtual_adversarial_training_finite_diff")
+    print ("### HyperParameters ###")
+    print ("epsilon:", str(epsilon))
+    print ("lambda:", str(lamb))
+    print ("norm_constraint:", str(norm_constraint)) 
+    print ("num_power_iter:", str(num_power_iter))
+    print ("unchain_y:", str(unchain_y))
+    print ("xi:", str(xi))
+    print ("#######################")
     ret = 0
     y = forward_func(x)
     ret += get_main_obj(y,t,main_obj_type)

@@ -28,7 +28,7 @@ class Linear(LearnableLayer):
             self.params.append(self.b)
 
     def forward(self,input):
-        print "Layer/Linear"
+        print ("Layer/Linear")
         input = self._as_mat(input)
         output = T.dot(input, self.W)
         if(self.use_bias == True):

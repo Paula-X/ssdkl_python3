@@ -47,7 +47,7 @@ class THEANO_CNN_MNIST(FNN):
                                            b=lasagne.init.Constant(0.1))
         pool3 = lasagne.layers.Pool2DLayer(conv3, (2, 2), stride=2, mode='max')
 
-    	# conv4
+        # conv4
         conv4 = lasagne.layers.Conv2DLayer(pool3, 64, (3, 3), stride=(1, 1),
                              nonlinearity=lasagne.nonlinearities.rectify,
                              W=lasagne.init.GlorotUniform(),
@@ -80,19 +80,19 @@ class THEANO_CNN_MNIST(FNN):
 
 class FNN_SIMPLE2(FNN):
     def __init__(self,layer_sizes):
-    	self.network = lasagne.layers.InputLayer((None, layer_sizes[0]))
-    	self.regularization_layers = []
+        self.network = lasagne.layers.InputLayer((None, layer_sizes[0]))
+        self.regularization_layers = []
         for n in layer_sizes[1:-1]:
-        	self.network = lasagne.layers.DenseLayer(self.network,
+            self.network = lasagne.layers.DenseLayer(self.network,
         				           n, nonlinearity=lasagne.nonlinearities.rectify,
         				           W=lasagne.init.GlorotUniform(),
         				           b=lasagne.init.Constant(0.1))
-        	self.regularization_layers.append(self.network)
-    	self.network = lasagne.layers.DenseLayer(self.network,
+            self.regularization_layers.append(self.network)
+        self.network = lasagne.layers.DenseLayer(self.network,
     				           layer_sizes[-1], nonlinearity=lasagne.nonlinearities.identity,
     				           W=lasagne.init.GlorotUniform(),
     				           b=lasagne.init.Constant(0.1))
-    	self.regularization_layers.append(self.network)
+        self.regularization_layers.append(self.network)
         self.params = lasagne.layers.get_all_params(self.network, trainable=True)
 
     def forward_for_finetuning_batch_stat(self,input):
@@ -102,4 +102,4 @@ class FNN_SIMPLE2(FNN):
         return self.forward(input,train,False)
 
     def forward(self,input,train=True,update_batch_stat=True,finetune=False):
-    	return lasagne.layers.get_output(self.network, inputs=input)
+        return lasagne.layers.get_output(self.network, inputs=input)

@@ -10,7 +10,7 @@ def get_kl(y,y_,main_obj_type,include_ent_term=False):
         if(include_ent_term):
             return T.sum(y_ * (T.log(y_) - T.log(y)), axis=1)
         else:
-            print "not include ent term"
+            print ("not include ent term")
             return - T.sum( y_ * T.log(y), axis=1)
     elif(main_obj_type=='QE'):
         return T.sum((y_-y)**2,axis=1)
@@ -26,14 +26,14 @@ def virtual_adversarial_training(x,t,forward_func,
                          unchain_y=True,
                          x_for_generating_adversarial_examples=None,
                          forward_func_for_generating_adversarial_examples=None,):
-    print "costs/virtual_adversarial_training"
-    print "### HyperParameters ###"
-    print "epsilon:", str(epsilon)
-    print "lambda:", str(lamb)
-    print "norm_constraint:", str(norm_constraint)
-    print "num_power_iter:", str(num_power_iter)
-    print "unchain_y:", str(unchain_y)
-    print "#######################"
+    print ("costs/virtual_adversarial_training")
+    print ("### HyperParameters ###")
+    print ("epsilon:", str(epsilon))
+    print ("lambda:", str(lamb))
+    print ("norm_constraint:", str(norm_constraint))
+    print ("num_power_iter:", str(num_power_iter))
+    print ("unchain_y:", str(unchain_y))
+    print ("#######################")
     ret = 0
     y = forward_func(x)
     ret += get_main_obj(y,t,main_obj_type)

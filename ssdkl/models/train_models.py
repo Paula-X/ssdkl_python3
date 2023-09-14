@@ -8,7 +8,7 @@ from sklearn.utils import shuffle
 import importlib
 import theano
 import theano.tensor as T
-import cPickle
+import pickle as cPickle
 from theano.tensor.shared_randomstreams import RandomStreams
 from collections import OrderedDict
 
@@ -78,13 +78,13 @@ class ModelTrainer:
         self.check_learning_counter = 0
         while self.trial < self.num_trials:
             t0 = time.time()
-            print 'Starting trial {}:'.format(self.trial + 1)
+            print ('Starting trial {}:'.format(self.trial + 1))
             self.best_saved_metric = None
             self._get_data()
             self._train()
             t1 = time.time()
-            print 'Finished trial {}: {} seconds elapsed\n'.format(
-                self.trial + 1, t1 - t0)
+            print ('Finished trial {}: {} seconds elapsed\n'.format(
+                self.trial + 1, t1 - t0))
             if self.check_learning_counter < 3:
                 self._check_learning()
             else:
@@ -511,42 +511,42 @@ class DKLTrainer(ModelTrainer):
         Prints a summary of initial values.
         """
         if self.verbose:
-            print 'Features:'
-            print ' Labeled: {}'.format(self.X_labeled.shape)
-            print ' Val: {}'.format(self.X_val.shape)
-            print ' Test: {}'.format(self.X_test.shape)
-            print 'Labels:'
-            print ' Labeled: {}'.format(self.y_labeled.shape)
-            print ' Val: {}'.format(self.y_val.shape)
-            print ' Test: {}'.format(self.y_test.shape)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
-            print 'GP parameters:'
-            print ' Sigma_l: {}'.format(self.sigma_l)
-            print ' Sigma_f: {}'.format(self.sigma_f)
-            print ' Sigma_n: {}'.format(self.sigma_n)
+            print ('Features:')
+            print (' Labeled: {}'.format(self.X_labeled.shape))
+            print (' Val: {}'.format(self.X_val.shape))
+            print (' Test: {}'.format(self.X_test.shape))
+            print ('Labels:')
+            print (' Labeled: {}'.format(self.y_labeled.shape))
+            print (' Val: {}'.format(self.y_val.shape))
+            print (' Test: {}'.format(self.y_test.shape))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
+            print ('GP parameters:')
+            print (' Sigma_l: {}'.format(self.sigma_l))
+            print (' Sigma_f: {}'.format(self.sigma_f))
+            print (' Sigma_n: {}'.format(self.sigma_n))
 
     def _print_iteration_summary(self, duration=None):
         """
         Prints a summary of training iteration.
         """
         if self.verbose:
-            print 'Iteration {} complete:'.format(self.step)
-            print ' GP parameters:'
-            print '  Sigma_l: {}'.format(self.sigma_l)
-            print '  Sigma_f: {}'.format(self.sigma_f)
-            print '  Sigma_n: {}'.format(self.sigma_n)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
+            print ('Iteration {} complete:'.format(self.step))
+            print (' GP parameters:')
+            print ('  Sigma_l: {}'.format(self.sigma_l))
+            print ('  Sigma_f: {}'.format(self.sigma_f))
+            print ('  Sigma_n: {}'.format(self.sigma_n))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
             if duration is not None:
-                print 'Iteration {} finished in {} seconds\n'.format(
-                    self.step, duration)
+                print ('Iteration {} finished in {} seconds\n'.format(
+                    self.step, duration))
 
     def _record_metrics(self):
         """
@@ -852,48 +852,48 @@ class SemisupDKLTrainer(ModelTrainer):
         Prints a summary of initial values.
         """
         if self.verbose:
-            print 'Features:'
-            print ' Labeled: {}'.format(self.X_labeled.shape)
-            print ' Val: {}'.format(self.X_val.shape)
-            print ' Test: {}'.format(self.X_test.shape)
-            print 'Labels:'
-            print ' Labeled: {}'.format(self.y_labeled.shape)
-            print ' Val: {}'.format(self.y_val.shape)
-            print ' Test: {}'.format(self.y_test.shape)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'Unlabeled:'
-            print ' Sum variances: {}'.format(self.var_unlabeled)
-            print ' Semisup loss: {}'.format(self.loss_semisup)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
-            print 'GP parameters:'
-            print ' Sigma_l: {}'.format(self.sigma_l)
-            print ' Sigma_f: {}'.format(self.sigma_f)
-            print ' Sigma_n: {}'.format(self.sigma_n)
+            print ('Features:')
+            print (' Labeled: {}'.format(self.X_labeled.shape))
+            print (' Val: {}'.format(self.X_val.shape))
+            print (' Test: {}'.format(self.X_test.shape))
+            print ('Labels:')
+            print (' Labeled: {}'.format(self.y_labeled.shape))
+            print (' Val: {}'.format(self.y_val.shape))
+            print (' Test: {}'.format(self.y_test.shape))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('Unlabeled:')
+            print (' Sum variances: {}'.format(self.var_unlabeled))
+            print (' Semisup loss: {}'.format(self.loss_semisup))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
+            print ('GP parameters:')
+            print (' Sigma_l: {}'.format(self.sigma_l))
+            print (' Sigma_f: {}'.format(self.sigma_f))
+            print (' Sigma_n: {}'.format(self.sigma_n))
 
     def _print_iteration_summary(self, duration=None):
         """
         Prints a summary of training iteration.
         """
         if self.verbose:
-            print 'Iteration {} complete:'.format(self.step)
-            print ' GP parameters:'
-            print '  Sigma_l: {}'.format(self.sigma_l)
-            print '  Sigma_f: {}'.format(self.sigma_f)
-            print '  Sigma_n: {}'.format(self.sigma_n)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'Unlabeled:'
-            print ' Sum variances: {}'.format(self.var_unlabeled)
-            print ' Semisup loss: {}'.format(self.loss_semisup)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
+            print ('Iteration {} complete:'.format(self.step))
+            print (' GP parameters:')
+            print ('  Sigma_l: {}'.format(self.sigma_l))
+            print ('  Sigma_f: {}'.format(self.sigma_f))
+            print ('  Sigma_n: {}'.format(self.sigma_n))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('Unlabeled:')
+            print (' Sum variances: {}'.format(self.var_unlabeled))
+            print (' Semisup loss: {}'.format(self.loss_semisup))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
             if duration is not None:
-                print 'Iteration {} finished in {} seconds\n'.format(
-                    self.step, duration)
+                print ('Iteration {} finished in {} seconds\n'.format(
+                    self.step, duration))
 
     def _record_metrics(self):
         """
@@ -1100,13 +1100,13 @@ class VATTrainer(ModelTrainer):
         self.check_learning_counter = 0
         while self.trial < self.num_trials:
             t0 = time.time()
-            print 'Starting trial {}:'.format(self.trial + 1)
+            print ('Starting trial {}:'.format(self.trial + 1))
             self.best_saved_metric = None
             self._get_data()
             self._run_training()
             t1 = time.time()
-            print 'Finished trial {}: {} seconds elapsed\n'.format(
-                self.trial + 1, t1 - t0)
+            print ('Finished trial {}: {} seconds elapsed\n'.format(
+                self.trial + 1, t1 - t0))
             if self.check_learning_counter < 3:
                 self._check_learning()
             else:
@@ -1227,38 +1227,38 @@ class VATTrainer(ModelTrainer):
         Prints a summary of initial values.
         """
         if self.verbose:
-            print 'Features:'
-            print ' Labeled: {}'.format(self.X_labeled.shape)
-            print ' Val: {}'.format(self.X_val.shape)
-            print ' Test: {}'.format(self.X_test.shape)
-            print 'Labels:'
-            print ' Labeled: {}'.format(self.y_labeled.shape)
-            print ' Val: {}'.format(self.y_val.shape)
-            print ' Test: {}'.format(self.y_test.shape)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'Unlabeled:'
-            print ' Semisup loss: {}'.format(self.loss_semisup)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
+            print ('Features:')
+            print (' Labeled: {}'.format(self.X_labeled.shape))
+            print (' Val: {}'.format(self.X_val.shape))
+            print (' Test: {}'.format(self.X_test.shape))
+            print ('Labels:')
+            print (' Labeled: {}'.format(self.y_labeled.shape))
+            print (' Val: {}'.format(self.y_val.shape))
+            print (' Test: {}'.format(self.y_test.shape))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('Unlabeled:')
+            print (' Semisup loss: {}'.format(self.loss_semisup))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
 
     def _print_iteration_summary(self, duration=None):
         """
         Prints a summary of training iteration.
         """
         if self.verbose:
-            print 'Iteration {} complete:'.format(self.step)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'Unlabeled:'
-            print ' Semisup loss: {}'.format(self.loss_semisup)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
+            print ('Iteration {} complete:'.format(self.step))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('Unlabeled:')
+            print (' Semisup loss: {}'.format(self.loss_semisup))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
             if duration is not None:
-                print 'Iteration {} finished in {} seconds\n'.format(
-                    self.step, duration)
+                print ('Iteration {} finished in {} seconds\n'.format(
+                    self.step, duration))
 
     def _record_metrics(self):
         """
@@ -1596,10 +1596,8 @@ class SemisupDKLWithLocTrainer(ModelTrainer):
         self._clear_metrics()
         self._setup_nns_gps(sess)
         # Create training op on semisup objective
-        self.trainable_vars_gp = [v for v in tf.trainable_variables()
-                                  if 'sigma' in v.name]
-        self.trainable_vars_nn = [v for v in tf.trainable_variables() if
-                                  'nn' in v.name]
+        self.trainable_vars_gp = [v for v in tf.trainable_variables() if 'sigma' in v.name]
+        self.trainable_vars_nn = [v for v in tf.trainable_variables() if 'nn' in v.name]
         self.train_op_gp = self._create_train_op(
             lr=self.lr_gp, loss=self.gp_val.semisup_loss,
             var_list=self.trainable_vars_gp, cap=True)
@@ -1617,52 +1615,52 @@ class SemisupDKLWithLocTrainer(ModelTrainer):
         Prints a summary of initial values.
         """
         if self.verbose:
-            print 'Features:'
-            print ' Labeled: {}'.format(self.X_labeled.shape)
-            print ' Val: {}'.format(self.X_val.shape)
-            print ' Test: {}'.format(self.X_test.shape)
-            print 'Labels:'
-            print ' Labeled: {}'.format(self.y_labeled.shape)
-            print ' Val: {}'.format(self.y_val.shape)
-            print ' Test: {}'.format(self.y_test.shape)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'Unlabeled:'
-            print ' Sum variances: {}'.format(self.var_unlabeled)
-            print ' Semisup loss: {}'.format(self.loss_semisup)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
-            print 'GP parameters:'
-            print ' Sigma_l: {}'.format(self.sigma_l)
-            print ' Sigma_f: {}'.format(self.sigma_f)
-            print ' Sigma_n: {}'.format(self.sigma_n)
-            print ' Sigma_l_loc: {}'.format(self.sigma_l_loc)
-            print ' Sigma_f_loc: {}'.format(self.sigma_f_loc)
+            print ('Features:')
+            print (' Labeled: {}'.format(self.X_labeled.shape))
+            print (' Val: {}'.format(self.X_val.shape))
+            print (' Test: {}'.format(self.X_test.shape))
+            print ('Labels:')
+            print (' Labeled: {}'.format(self.y_labeled.shape))
+            print (' Val: {}'.format(self.y_val.shape))
+            print (' Test: {}'.format(self.y_test.shape))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('Unlabeled:')
+            print (' Sum variances: {}'.format(self.var_unlabeled))
+            print (' Semisup loss: {}'.format(self.loss_semisup))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
+            print ('GP parameters:')
+            print (' Sigma_l: {}'.format(self.sigma_l))
+            print (' Sigma_f: {}'.format(self.sigma_f))
+            print (' Sigma_n: {}'.format(self.sigma_n))
+            print (' Sigma_l_loc: {}'.format(self.sigma_l_loc))
+            print (' Sigma_f_loc: {}'.format(self.sigma_f_loc))
 
     def _print_iteration_summary(self, duration=None):
         """
         Prints a summary of training iteration.
         """
         if self.verbose:
-            print 'Iteration {} complete:'.format(self.step)
-            print ' GP parameters:'
-            print '  Sigma_l: {}'.format(self.sigma_l)
-            print '  Sigma_f: {}'.format(self.sigma_f)
-            print '  Sigma_n: {}'.format(self.sigma_n)
-            print ' Sigma_l_loc: {}'.format(self.sigma_l_loc)
-            print ' Sigma_f_loc: {}'.format(self.sigma_f_loc)
-            print 'Log marginal likelihood:'
-            print ' Labeled: {}'.format(self.lml_labeled)
-            print 'Unlabeled:'
-            print ' Sum variances: {}'.format(self.var_unlabeled)
-            print ' Semisup loss: {}'.format(self.loss_semisup)
-            print 'MSE:'
-            print ' Val: {}'.format(self.mse_val)
-            print ' Test: {}'.format(self.mse_test)
+            print ('Iteration {} complete:'.format(self.step))
+            print (' GP parameters:')
+            print ('  Sigma_l: {}'.format(self.sigma_l))
+            print ('  Sigma_f: {}'.format(self.sigma_f))
+            print ('  Sigma_n: {}'.format(self.sigma_n))
+            print (' Sigma_l_loc: {}'.format(self.sigma_l_loc))
+            print (' Sigma_f_loc: {}'.format(self.sigma_f_loc))
+            print ('Log marginal likelihood:')
+            print (' Labeled: {}'.format(self.lml_labeled))
+            print ('Unlabeled:')
+            print (' Sum variances: {}'.format(self.var_unlabeled))
+            print (' Semisup loss: {}'.format(self.loss_semisup))
+            print ('MSE:')
+            print (' Val: {}'.format(self.mse_val))
+            print (' Test: {}'.format(self.mse_test))
             if duration is not None:
-                print 'Iteration {} finished in {} seconds\n'.format(
-                    self.step, duration)
+                print ('Iteration {} finished in {} seconds\n'.format(
+                    self.step, duration))
 
     def _record_metrics(self):
         """
